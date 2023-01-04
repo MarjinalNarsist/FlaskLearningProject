@@ -16,9 +16,6 @@ from requests import request
 from flask_gravatar import Gravatar
 
 
-# Delete this code:
-# import requests
-# posts = requests.get("https://api.npoint.io/43644ec4f0013682fc0d").json()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -33,6 +30,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+# Avatar for Comments
 gravatar = Gravatar(app, size=100, rating="g", default="retro", force_default=False, use_ssl=False, base_url=None)
 
 
