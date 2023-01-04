@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+          <form class="" action="" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+            {{ form.title.label }}<br>
+            {{ form.title(size=20) }}<br>
+            {{ form.subtitle.label }}<br>
+            {{ form.subtitle(size=20) }}<br>
+            {{ form.img_url.label }}<br>
+            {{ form.img_url(size=20) }}<br>
+            {{ form.body.label }}<br>
+            {{ form.body() }}<br>
+            {{ form.submit() }}
+          </form>
+          {{ ckeditor.load() }}
+          {{ ckeditor.config(name='body') }}
+
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('login') }}" method="post">
+          {{ form.hidden_tag() }}
+          {{ form.csrf_token }}
+
+          {{ form.e_mail.label }}: <br>
+          {{ form.e_mail(size=20) }} <br>
+
+          {{ form.password.label }}: <br>
+          {{ form.password(size=20) }} <br>
+          <br>
+          {{ form.submit() }}
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
