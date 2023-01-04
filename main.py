@@ -1,3 +1,4 @@
+import os
 import requests
 import wtforms
 from flask import Flask, render_template, redirect, url_for, request, flash
@@ -18,6 +19,7 @@ from flask_gravatar import Gravatar
 
 
 app = Flask(__name__)
+
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 ckeditor = CKEditor(app)
 Bootstrap(app)
@@ -32,6 +34,17 @@ login_manager.init_app(app)
 
 # Avatar for Comments
 gravatar = Gravatar(app, size=100, rating="g", default="retro", force_default=False, use_ssl=False, base_url=None)
+
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
+
+
+class Config(object):
+    # Since SQLAlchemy 1.4.x has removed support for the 'postgres://' URI scheme,
+    # update the URI to the postgres database to use the supported 'postgresql://' scheme
+    if os.getenv('DATABASE_URL'):
+        SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+    else:
+        SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASEDIR, 'instance', 'app.db')}"
 
 
 # User Database
